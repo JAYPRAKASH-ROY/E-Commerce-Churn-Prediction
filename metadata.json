@@ -1,0 +1,1 @@
+{"feature_medians": {"frequency": 1.0, "avg_order_value": 105.83, "total_spent": 108.0, "avg_review_score": 5.0, "avg_delivery_delay": -12.0, "recency_days": 268.0, "tenure_days": 0.0}, "recency_strategy": "recency_ratio_2x", "avg_gap_median": 30.0, "train_examples": 96096, "f1_best_threshold": 0.5238095238095237}
