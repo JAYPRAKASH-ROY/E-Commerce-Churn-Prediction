@@ -95,6 +95,20 @@ with tab2:
     st.subheader("📂 Batch Prediction via CSV")
     st.write("Upload a CSV with customer features. Extra columns ignored; missing features filled with medians.")
 
+    # --- Provide downloadable template ---
+    template_df = pd.DataFrame([{
+        "frequency": 5,
+        "avg_order_value": 250.0,
+        "total_spent": 1250.0,
+        "avg_review_score": 4.5,
+        "avg_delivery_delay": 1,
+        "recency_days": 45,
+        "tenure_days": 400
+    }])
+    template_csv = template_df.to_csv(index=False).encode("utf-8")
+    st.download_button("📥 Download CSV Template", template_csv,
+                       "sample_customers_template.csv", "text/csv")
+
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
     if uploaded_file is not None:
@@ -109,7 +123,9 @@ with tab2:
             # Process
             data_proc = data[FEATURES].copy()
             for f in FEATURES:
-                data_proc[f] = pd.to_numeric(data_proc[f], errors='coerce').fillna(feature_medians.get(f, 0))
+                data_proc[f] = pd.to_numeric(
+                    data_proc[f], errors='coerce'
+                ).fillna(feature_medians.get(f, 0))
 
             max_rows = 10000
             if len(data_proc) > max_rows:
